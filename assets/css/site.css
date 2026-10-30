@@ -343,21 +343,39 @@ img { max-width: 100%; }
 
 /* ===== Look Inside flip book ===== */
 .flipbook { position: relative; margin: 0 0 64px; outline: none; }
-.fb-book { --case: max(4px, 0.73cqw); --sl: 2px; --sr: 9px; container-type: inline-size; position: relative; width: 107%; margin: 0 -3.5%; perspective: 2800px; }
+.fb-book { --case: max(4px, 0.73cqw); --sl: 2px; --sr: 9px; container-type: inline-size; position: relative; width: 110.2%; margin: 0 -5.1%; perspective: 2800px; }
 .fb-stage { position: relative; z-index: 2; width: 100%; aspect-ratio: 2760 / 1708; cursor: pointer; user-select: none; -webkit-user-select: none;
   background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
-/* Hardcover boards: the cover art, a few millimetres proud of the pages, lying on a table */
-.fb-case { position: absolute; z-index: 0; top: calc(-1 * var(--case)); bottom: calc(-1 * var(--case) - 2px);
-  left: calc(-1 * (var(--case) + var(--sl))); right: calc(-1 * (var(--case) + var(--sr))); display: flex; border-radius: 3px; transition: left .9s ease, right .9s ease;
+/* Hardcover open on a table: left board = front cover (front flap folded in), right board = back cover (back flap folded in).
+   1mm = book width / 480 (two 240mm pages). */
+.fb-case { --mm: calc(100cqw / 480); position: absolute; z-index: 0; top: calc(-1 * var(--case)); bottom: calc(-1 * var(--case) - 2px);
+  left: calc(-1 * (var(--case) + var(--sl))); right: calc(-1 * (var(--case) + var(--sr))); display: flex; border-radius: 3px;
+  transition: left .9s ease, right .9s ease;
   box-shadow: 0 46px 70px -18px rgba(0,0,0,0.75), 0 18px 34px rgba(0,0,0,0.35), 0 3px 6px rgba(0,0,0,0.4); }
-.fb-board { position: relative; flex: 1; background-size: cover; background-position: center; }
-.fb-board-l { background-image: url('../img/board-back.webp'); border-radius: 3px 0 0 3px; }
-.fb-board-r { background-image: url('../img/board-front.webp'); border-radius: 0 3px 3px 0; }
-.fb-board::after { content: ''; position: absolute; inset: 0; border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.12));
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 -3px 0 rgba(0,0,0,0.45), inset 0 2px 0 rgba(255,255,255,0.12); }
-.fb-board-l::after { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 -3px 0 rgba(0,0,0,0.45), inset 3px 0 0 rgba(0,0,0,0.35), inset -10px 0 14px -6px rgba(0,0,0,0.55); }
-.fb-board-r::after { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 -3px 0 rgba(0,0,0,0.45), inset -3px 0 0 rgba(0,0,0,0.35), inset 10px 0 14px -6px rgba(0,0,0,0.55); }
+.fb-board { position: relative; flex: 1; overflow: hidden; }
+.fb-board-l { border-radius: 3px 0 0 3px; }
+.fb-board-r { border-radius: 0 3px 3px 0; }
+.fb-art { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.9); }
+.fb-board-l .fb-art { background-image: url('../img/board-front.webp'); }
+.fb-board-r .fb-art { background-image: url('../img/board-back.webp'); }
+/* Dust-jacket flaps wrapped around the outer edges, about 118mm deep */
+.fb-flap { position: absolute; top: 0; bottom: 0; width: calc(var(--mm) * 118); background-size: 100% 100%; }
+.fb-board-l .fb-flap { left: 0; background-image: url('../img/flap-front.webp');
+  box-shadow: 3px 0 5px rgba(0,0,0,0.35), inset 2px 0 0 rgba(255,255,255,0.10); }
+.fb-board-r .fb-flap { right: 0; background-image: url('../img/flap-back.webp');
+  box-shadow: -3px 0 5px rgba(0,0,0,0.35), inset -2px 0 0 rgba(255,255,255,0.10); }
+.fb-board::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.10)); }
+.fb-board-l::after { box-shadow: inset 0 -3px 0 rgba(0,0,0,0.45), inset 0 2px 0 rgba(255,255,255,0.10), inset 3px 0 0 rgba(0,0,0,0.3), inset -10px 0 14px -6px rgba(0,0,0,0.55); }
+.fb-board-r::after { box-shadow: inset 0 -3px 0 rgba(0,0,0,0.45), inset 0 2px 0 rgba(255,255,255,0.10), inset -3px 0 0 rgba(0,0,0,0.3), inset 10px 0 14px -6px rgba(0,0,0,0.55); }
+/* 32mm spine underneath: dark hollow with a sliver of the gold foil spine at head and tail */
+.fb-spine { position: absolute; z-index: 1; left: 50%; width: calc(var(--mm) * 32); transform: translateX(-50%);
+  top: -1px; bottom: -1px; border-radius: 2px; pointer-events: none;
+  background:
+    linear-gradient(180deg, #c9a64e 0, #f0d690 1.2px, #a8842f 2.6px, transparent 3.2px) top / 100% 100% no-repeat,
+    linear-gradient(0deg, #c9a64e 0, #f0d690 1.2px, #a8842f 2.6px, transparent 3.2px) bottom / 100% 100% no-repeat,
+    linear-gradient(90deg, #0d0f12 0%, #22252a 18%, #2c2a24 50%, #22252a 82%, #0d0f12 100%);
+  box-shadow: 0 0 6px rgba(0,0,0,0.6); }
 /* Page block edges: thicker on the side you have read through */
 .fb-stack { position: absolute; z-index: 1; top: 2px; bottom: -2px; border-radius: 1px;
   background: repeating-linear-gradient(90deg, #f7f4ec 0 1px, #d6d0c3 1px 2px); box-shadow: 0 1px 2px rgba(0,0,0,0.3); transition: width .9s ease; }

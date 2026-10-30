@@ -24,7 +24,9 @@
 
   // Hardcover case and page-block edges behind the spread.
   var kase = document.createElement('div'); kase.className = 'fb-case'; kase.setAttribute('aria-hidden', 'true');
-  kase.innerHTML = '<div class="fb-board fb-board-l"></div><div class="fb-board fb-board-r"></div>';
+  kase.innerHTML = '<div class="fb-board fb-board-l"><div class="fb-art"></div><div class="fb-flap"></div></div>' +
+    '<div class="fb-board fb-board-r"><div class="fb-art"></div><div class="fb-flap"></div></div>' +
+    '<div class="fb-spine"></div>';
   var stackL = document.createElement('div'); stackL.className = 'fb-stack fb-stack-l'; stackL.setAttribute('aria-hidden', 'true');
   var stackR = document.createElement('div'); stackR.className = 'fb-stack fb-stack-r'; stackR.setAttribute('aria-hidden', 'true');
   book.insertBefore(stackR, stage); book.insertBefore(stackL, stackR); book.insertBefore(kase, stackL);
