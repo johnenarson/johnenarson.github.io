@@ -143,12 +143,12 @@ img { max-width: 100%; }
 .pair-photo { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; border-radius: 6px; margin-bottom: 36px; }
 
 /* Bio: full-bleed blue portrait, text in the negative space on the right */
-.bio { position: relative; overflow: hidden; background: #04759a; min-height: clamp(560px, 56vw, 860px); display: flex; align-items: center; }
-.bio-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 30%; display: block; }
-.bio::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,60,85,0) 45%, rgba(3,60,85,0.35) 100%); pointer-events: none; }
+.bio { position: relative; overflow: hidden; background: #1f5374; min-height: clamp(520px, 48vw, 820px); display: flex; align-items: center; }
+.bio-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% 30%; display: block; }
+.bio::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,40,60,0) 50%, rgba(14,40,60,0.25) 100%); pointer-events: none; }
 .bio-in { position: relative; z-index: 1; width: 100%; max-width: 1240px; margin: 0 auto; padding: clamp(64px, 9vh, 120px) var(--gutter); display: flex; justify-content: flex-end; }
 .bio-text { width: min(46%, 560px); color: var(--white); }
-.bio .eyebrow { color: var(--navy); }
+.bio .eyebrow { color: var(--gold); }
 .bio .h2 { font-size: clamp(32px, 3.6vw, 50px); }
 .bio .h2 em { color: var(--white); }
 .bio .lead { font-size: 19px; color: rgba(255,255,255,0.94); }
