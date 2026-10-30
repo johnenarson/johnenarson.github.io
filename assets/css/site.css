@@ -498,3 +498,9 @@ img { max-width: 100%; }
 .post.is-lead .post-txt { display: flex; }
 .post-img img { object-position: center 30%; }
 @media (max-width: 860px) { .posts { grid-template-columns: 1fr; } .post.is-lead { grid-template-columns: 1fr; } }
+
+/* Inline links to organizations in running text */
+a.inline-link { color: inherit; text-decoration: underline; text-decoration-color: rgba(217,178,95,0.6); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .15s ease, text-decoration-color .15s ease; }
+a.inline-link:hover { color: var(--gold-hi); text-decoration-color: var(--gold-hi); }
+.bio a.inline-link, .sec.blue a.inline-link { text-decoration-color: rgba(255,255,255,0.6); }
+.bio a.inline-link:hover, .sec.blue a.inline-link:hover { color: var(--white); text-decoration-color: var(--white); }
