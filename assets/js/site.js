@@ -6,7 +6,7 @@
   var title = document.querySelector('.hero-title');
   var temple = document.querySelector('.temple');
   var templeBg = document.querySelector('.temple-bg');
-  var K = 0.5; // overall strength (0–1)
+  var K = 1; // overall strength (0–1)
   var ticking = false;
 
   function update() {
