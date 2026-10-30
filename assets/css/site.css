@@ -504,3 +504,13 @@ a.inline-link { color: inherit; text-decoration: underline; text-decoration-colo
 a.inline-link:hover { color: var(--gold-hi); text-decoration-color: var(--gold-hi); }
 .bio a.inline-link, .sec.blue a.inline-link { text-decoration-color: rgba(255,255,255,0.6); }
 .bio a.inline-link:hover, .sec.blue a.inline-link:hover { color: var(--white); text-decoration-color: var(--white); }
+
+/* About: film section with the trailer playing silently in the background */
+.sec.film { position: relative; overflow: hidden; background: #0d0f12; }
+.film-bg { position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity 2s ease; pointer-events: none; }
+.film-bg.is-on { opacity: 0.32; }
+.film-bg iframe { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; border: 0; transform: translate(-50%, -50%); pointer-events: none; }
+.film-shade { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(13,15,18,0.55) 0%, rgba(13,15,18,0.25) 50%, rgba(13,15,18,0.7) 100%), linear-gradient(180deg, rgba(13,15,18,0.6), rgba(13,15,18,0) 25%, rgba(13,15,18,0) 75%, rgba(13,15,18,0.6)); }
+.film-in { position: relative; z-index: 2; }
+.film-photo { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-radius: 6px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
