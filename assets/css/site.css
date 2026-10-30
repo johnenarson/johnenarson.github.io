@@ -343,9 +343,30 @@ img { max-width: 100%; }
 
 /* ===== Look Inside flip book ===== */
 .flipbook { position: relative; margin: 0 0 64px; outline: none; }
-.fb-book { width: 100%; margin: 0 auto; perspective: 2800px; }
-.fb-stage { position: relative; width: 100%; aspect-ratio: 2760 / 1708; cursor: pointer; user-select: none; -webkit-user-select: none;
-  box-shadow: 0 34px 80px rgba(0,0,0,0.55), 0 8px 22px rgba(0,0,0,0.35); background: #fff; }
+.fb-book { --case: max(4px, 0.73cqw); --sl: 2px; --sr: 9px; container-type: inline-size; position: relative; width: 107%; margin: 0 -3.5%; perspective: 2800px; }
+.fb-stage { position: relative; z-index: 2; width: 100%; aspect-ratio: 2760 / 1708; cursor: pointer; user-select: none; -webkit-user-select: none;
+  background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+/* Hardcover boards: the cover art, a few millimetres proud of the pages, lying on a table */
+.fb-case { position: absolute; z-index: 0; top: calc(-1 * var(--case)); bottom: calc(-1 * var(--case) - 2px);
+  left: calc(-1 * (var(--case) + var(--sl))); right: calc(-1 * (var(--case) + var(--sr))); display: flex; border-radius: 3px; transition: left .9s ease, right .9s ease;
+  box-shadow: 0 46px 70px -18px rgba(0,0,0,0.75), 0 18px 34px rgba(0,0,0,0.35), 0 3px 6px rgba(0,0,0,0.4); }
+.fb-board { position: relative; flex: 1; background-size: cover; background-position: center; }
+.fb-board-l { background-image: url('../img/board-back.webp'); border-radius: 3px 0 0 3px; }
+.fb-board-r { background-image: url('../img/board-front.webp'); border-radius: 0 3px 3px 0; }
+.fb-board::after { content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.12));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 -3px 0 rgba(0,0,0,0.45), inset 0 2px 0 rgba(255,255,255,0.12); }
+.fb-board-l::after { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 -3px 0 rgba(0,0,0,0.45), inset 3px 0 0 rgba(0,0,0,0.35), inset -10px 0 14px -6px rgba(0,0,0,0.55); }
+.fb-board-r::after { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 -3px 0 rgba(0,0,0,0.45), inset -3px 0 0 rgba(0,0,0,0.35), inset 10px 0 14px -6px rgba(0,0,0,0.55); }
+/* Page block edges: thicker on the side you have read through */
+.fb-stack { position: absolute; z-index: 1; top: 2px; bottom: -2px; border-radius: 1px;
+  background: repeating-linear-gradient(90deg, #f7f4ec 0 1px, #d6d0c3 1px 2px); box-shadow: 0 1px 2px rgba(0,0,0,0.3); transition: width .9s ease; }
+.fb-stack-l { left: calc(-1 * var(--sl)); width: var(--sl); }
+.fb-stack-r { right: calc(-1 * var(--sr)); width: var(--sr); }
+.fb-book.is-single .fb-board-l { display: none; }
+.fb-book.is-single .fb-case { left: calc(50% - (min(100%, 560px) / 2) - var(--case) - 2px); right: calc(50% - (min(100%, 560px) / 2) - var(--case) - 9px); }
+.fb-book.is-single .fb-stack { display: none; }
+@media (max-width: 760px) { .fb-book { width: 100%; margin: 0; } }
 .fb-book.is-single .fb-stage { aspect-ratio: 1380 / 1708; max-width: 560px; margin: 0 auto; }
 .fb-page { position: absolute; top: 0; bottom: 0; width: 50%; overflow: hidden; }
 .fb-left { left: 0; } .fb-right { right: 0; }
@@ -387,7 +408,7 @@ img { max-width: 100%; }
 .fb-status { min-width: 130px; text-align: center; font: 500 12px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .fb-controls .fb-full { margin-left: 8px; }
 .flipbook:fullscreen { background: var(--bg-left); display: flex; flex-direction: column; justify-content: center; padding: 24px; margin: 0; }
-.flipbook:fullscreen .fb-book { width: min(100%, calc((100vh - 130px) * 1.616)); }
+.flipbook:fullscreen .fb-book { width: min(calc(100% - 40px), calc((100vh - 150px) * 1.616)); margin: 0 auto; }
 .flipbook:fullscreen .fb-book.is-single .fb-stage { max-width: calc((100vh - 130px) * 0.808); }
 .flipbook:-webkit-full-screen { background: var(--bg-left); display: flex; flex-direction: column; justify-content: center; padding: 24px; margin: 0; width: 100%; height: 100%; }
 @media (prefers-reduced-motion: reduce) { .fb-leaf.is-turning { transition: none; } .fb-out-next, .fb-out-prev { animation: none; } }

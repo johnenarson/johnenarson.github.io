@@ -22,6 +22,13 @@
   var fsBtn = root.querySelector('.fb-full');
   var status = root.querySelector('.fb-status');
 
+  // Hardcover case and page-block edges behind the spread.
+  var kase = document.createElement('div'); kase.className = 'fb-case'; kase.setAttribute('aria-hidden', 'true');
+  kase.innerHTML = '<div class="fb-board fb-board-l"></div><div class="fb-board fb-board-r"></div>';
+  var stackL = document.createElement('div'); stackL.className = 'fb-stack fb-stack-l'; stackL.setAttribute('aria-hidden', 'true');
+  var stackR = document.createElement('div'); stackR.className = 'fb-stack fb-stack-r'; stackR.setAttribute('aria-hidden', 'true');
+  book.insertBefore(stackR, stage); book.insertBefore(stackL, stackR); book.insertBefore(kase, stackL);
+
   var narrow = window.matchMedia('(max-width: 760px)');
   var single = narrow.matches;
   var pos = 0;          // spread index (two-page mode) or page index (single mode)
@@ -66,6 +73,9 @@
       stage.appendChild(slot('fb-left', L(pos)));
       stage.appendChild(slot('fb-right', Rr(pos)));
     }
+    var prog = total() > 1 ? pos / (total() - 1) : 0;
+    book.style.setProperty('--sl', (2 + 7 * prog).toFixed(1) + 'px');
+    book.style.setProperty('--sr', (2 + 7 * (1 - prog)).toFixed(1) + 'px');
     prevBtn.disabled = pos === 0;
     nextBtn.disabled = pos >= total() - 1;
     if (status) status.textContent = single ? ('Page ' + (pos + 1) + ' of ' + pages.length) : ('Spread ' + (pos + 1) + ' of ' + spreads());
