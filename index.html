@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=6">
+  <link rel="stylesheet" href="assets/css/site.css?v=7">
 </head>
 <body>
 <div class="page">
@@ -105,10 +105,13 @@
   </div>
 </section>
 
-<section id="about" class="sec">
-  <div class="wrap two">
-    <img class="bio-photo" src="assets/img/john-portrait.webp" alt="Portrait of John Enarson" width="1100" height="1186" loading="lazy">
-    <div>
+<section id="about" class="bio">
+  <picture>
+    <source media="(max-width: 760px)" srcset="assets/img/john-blue-sm.jpg">
+    <img class="bio-bg" src="assets/img/john-blue.jpg" alt="Portrait of John Enarson" width="2400" height="1350" loading="lazy">
+  </picture>
+  <div class="bio-in">
+    <div class="bio-text">
       <p class="eyebrow">About John</p>
       <h2 class="h2">Educator, author, and creative director <em>in Israel.</em></h2>
       <p class="lead">Born in Sweden, John has lived in Israel for 30 years with his wife and five children. He serves as Christian Relations Director at Cry For Zion and works to make complex biblical topics and history accessible to a wider audience.</p>
@@ -135,7 +138,7 @@
 <section class="sec" style="border-top: 0">
   <div class="wrap pair">
     <div id="speaking">
-      <div class="ph photo" role="img" aria-label="Image placeholder: John speaking"><b>IMAGE · JOHN SPEAKING</b><span>Teaching a group, ideally on location in Jerusalem · 3:2</span></div>
+      <img class="pair-photo" src="assets/img/speaking.jpg" alt="John Enarson preaching from a church pulpit" width="1200" height="800" loading="lazy">
       <p class="eyebrow">Speaking</p>
       <h3 class="h3">Invite John to your church or event</h3>
       <p>Jesus and the Temple Mount · Christians and Israel · The Jewish roots of the faith · Antisemitism in the church</p>
@@ -164,6 +167,6 @@
 </footer>
 
 </div>
-<script src="assets/js/site.js?v=6"></script>
+<script src="assets/js/site.js?v=7"></script>
 </body>
 </html>
