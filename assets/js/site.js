@@ -6,7 +6,7 @@
   var title = document.querySelector('.hero-title');
   var temple = document.querySelector('.temple');
   var templeBg = document.querySelector('.temple-bg');
-  var K = 0.5; // overall strength (0–1)
+  var K = 0.35; // overall strength (0–1)
   var ticking = false;
 
   function update() {
@@ -16,7 +16,7 @@
     if (title) title.style.transform = 'translate3d(0,' + (y * -0.06 * K).toFixed(1) + 'px,0)';
     if (temple && templeBg) {
       var top = temple.getBoundingClientRect().top;
-      var shift = Math.max(-140, Math.min(140, -top * 0.18));
+      var shift = Math.max(-140, Math.min(140, -top * 0.13));
       templeBg.style.transform = 'translate3d(0,' + shift.toFixed(1) + 'px,0)';
     }
   }

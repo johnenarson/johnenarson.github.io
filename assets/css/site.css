@@ -140,6 +140,7 @@ img { max-width: 100%; }
 .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(40px, 6vw, 96px); align-items: center; }
 .two .h2 { font-size: clamp(32px, 4vw, 50px); }
 .two .lead { font-size: 19px; }
+.bio-photo { width: 100%; height: auto; display: block; }
 
 /* Subscribe band */
 .subscribe { background: var(--blue); padding: clamp(88px, 12vh, 140px) var(--gutter); text-align: center; color: var(--white); }
