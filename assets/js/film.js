@@ -10,14 +10,16 @@
   function size() {
     var f = bg.querySelector('iframe'); if (!f) return;
     var w = bg.clientWidth, h = bg.clientHeight;
-    var vw = Math.max(w, h * 16 / 9), vh = vw * 9 / 16;   // cover the section at 16:9
+    // Cover the section at 16:9, oversized so the bottom of the frame (where subtitles sit) is cropped away.
+    var vw = Math.max(w, h * 16 / 9) * 1.3, vh = vw * 9 / 16;
     f.style.width = vw + 'px'; f.style.height = vh + 'px';
+    f.style.top = (h / 2 + vh * 0.12) + 'px';   // push the video down: its lower ~25% sits below the section
   }
   function start() {
     if (started) return; started = true;
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&mute=1&loop=1&playlist=' + id +
-      '&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+      '&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&cc_lang_pref=zz&hl=en&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
     f.title = 'I Am Israel trailer (background)';
     f.setAttribute('allow', 'autoplay; encrypted-media');
     f.setAttribute('tabindex', '-1');
@@ -30,6 +32,7 @@
         setTimeout(function () {
           send({ event: 'command', func: 'unloadModule', args: ['captions'] });
           send({ event: 'command', func: 'unloadModule', args: ['cc'] });
+          send({ event: 'command', func: 'setOption', args: ['captions', 'track', {}] });
         }, t);
       });
     });
