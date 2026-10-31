@@ -1,7 +1,7 @@
 /* johnenarson.com — site styles */
 :root {
-  --bg-left: #17191e;
-  --bg-right: #2c3137;
+  --bg-left: #191d22;
+  --bg-right: #31373e;
   --gold: #d9b25f;
   --gold-hi: #f0d08e;
   --gold-link: #e2c27f;
@@ -62,7 +62,7 @@ img { max-width: 100%; }
 .split .pre:hover { background: var(--blue); color: var(--white); }
 .split .div { width: 1px; background: rgba(9,36,53,0.35); }
 .split .look { padding: 0 34px 0 30px; background: var(--offwhite); }
-.split .look:hover { background: #2c3137; color: var(--white); }
+.split .look:hover { background: var(--bg-right); color: var(--white); }
 
 /* Header */
 .site-header { border-bottom: 1px solid rgba(255,255,255,0.09); }
@@ -111,7 +111,8 @@ img { max-width: 100%; }
 /* Sections */
 .sec { border-top: 1px solid var(--rule); padding: var(--sec-pad) var(--gutter); }
 .sec.tint { background: rgba(255,255,255,0.025); }
-#inside.sec { background: linear-gradient(90deg, #092435 0%, #2c3137 100%); }
+#inside.sec { background: linear-gradient(90deg, #092435 0%, #31373e 100%); }
+#inside.sec.lift { background: linear-gradient(90deg, #1d2127 0%, #383f47 100%); }
 
 /* Endorsements */
 .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(48px, 6vw, 88px); }
@@ -448,6 +449,18 @@ img { max-width: 100%; }
 .sec.blue .text-link:hover { border-color: var(--white); }
 #endorsements .more { margin: 72px 0 0; text-align: center; }
 #endorsements .more .text-link { font-size: 15px; }
+
+/* Cream endorsements band (home) */
+.sec.cream { background: linear-gradient(90deg, #d6cfb5 0%, #e6e0cc 100%); border-top: 0; color: #3b4650; }
+.sec.cream .quote blockquote { color: var(--navy); }
+.sec.cream .quote figcaption { color: #4a5661; }
+.sec.cream .quote figcaption b { color: #8a6a26; }
+.sec.cream .quote img { border-color: var(--white); box-shadow: 0 0 0 6px rgba(255,255,255,0.45), 0 14px 28px rgba(9,36,53,0.22); }
+.sec.cream .text-link { color: var(--navy); border-bottom: 1px solid rgba(9,36,53,0.45); padding-bottom: 4px; }
+.sec.cream .text-link:hover { color: var(--blue); border-color: var(--blue); }
+.sec.cream .q-next { border-color: rgba(9,36,53,0.45); background: rgba(255,255,255,0.35); color: var(--navy); }
+.sec.cream .q-next:hover { background: var(--navy); color: var(--white); }
+.sec.cream a.inline-link { color: var(--navy); }
 
 /* Endorsement carousel (home): two quotes in view, the next one peeking in faded from the right */
 .q-carousel { position: relative; --gap: clamp(40px, 6vw, 88px); --card: calc((100% - var(--gap)) / 2); }
