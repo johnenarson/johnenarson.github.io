@@ -440,7 +440,6 @@ img { max-width: 100%; }
 .sec.blue .quote img { border-color: var(--white); box-shadow: 0 0 0 6px rgba(255,255,255,0.18), 0 14px 30px rgba(9,36,53,0.35); }
 .sec.blue .text-link { color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.55); padding-bottom: 4px; }
 .sec.blue .text-link:hover { border-color: var(--white); }
-#endorsements .eyebrow { text-align: center; font-size: 15px; margin-bottom: 40px; }
 #endorsements .more { margin: 72px 0 0; text-align: center; }
 #endorsements .more .text-link { font-size: 15px; }
 
