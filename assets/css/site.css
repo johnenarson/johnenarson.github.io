@@ -406,7 +406,7 @@ img { max-width: 100%; }
 .fb-one::after { display: none; }
 .fb-face { position: absolute; inset: 0; background: #fff; overflow: hidden; }
 .fb-face img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-.fb-wm { display: none; position: absolute; left: 50%; bottom: 7%; width: 36%; transform: translateX(-50%); opacity: 0.6; pointer-events: none; filter: drop-shadow(0 0 1.5px rgba(0,0,0,0.35)) drop-shadow(0 1px 6px rgba(0,0,0,0.25)); }
+.fb-wm { display: none; position: absolute; left: 8.7%; bottom: 7%; width: 36%; opacity: 0.6; pointer-events: none; filter: drop-shadow(0 0 1.5px rgba(0,0,0,0.35)) drop-shadow(0 1px 6px rgba(0,0,0,0.25)); }
 .flipbook:fullscreen .fb-left .fb-wm, .flipbook:fullscreen .fb-back .fb-wm, .flipbook:fullscreen .fb-one .fb-wm { display: block; }
 .flipbook:-webkit-full-screen .fb-left .fb-wm, .flipbook:-webkit-full-screen .fb-back .fb-wm, .flipbook:-webkit-full-screen .fb-one .fb-wm { display: block; }
 .fb-leaf { position: absolute; top: 0; bottom: 0; right: 0; width: 50%; z-index: 5; transform-origin: left center; transform-style: preserve-3d; }
