@@ -455,7 +455,7 @@ img { max-width: 100%; }
 .sec.cream .quote blockquote { color: #191919; }
 .sec.cream .quote figcaption { color: #4a5661; }
 .sec.cream .quote figcaption b { color: #9a7428; }
-.sec.cream .quote img { border-color: var(--gold); box-shadow: 0 0 0 6px rgba(217,178,95,0.18), 0 14px 28px rgba(9,36,53,0.18); }
+.sec.cream .quote img { border: 4px solid #ffffff; box-shadow: 0 12px 26px rgba(9,36,53,0.16); }
 .sec.cream .text-link { color: var(--navy); border-bottom: 1px solid rgba(9,36,53,0.45); padding-bottom: 4px; }
 .sec.cream .text-link:hover { color: var(--blue); border-color: var(--blue); }
 .sec.cream .q-next { border-color: rgba(9,36,53,0.45); background: rgba(255,255,255,0.5); color: var(--navy); }

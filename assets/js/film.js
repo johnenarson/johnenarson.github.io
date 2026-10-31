@@ -17,11 +17,22 @@
     if (started) return; started = true;
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&mute=1&loop=1&playlist=' + id +
-      '&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0';
+      '&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
     f.title = 'I Am Israel trailer (background)';
     f.setAttribute('allow', 'autoplay; encrypted-media');
     f.setAttribute('tabindex', '-1');
-    f.addEventListener('load', function () { setTimeout(function () { bg.classList.add('is-on'); }, 1200); });
+    f.addEventListener('load', function () {
+      setTimeout(function () { bg.classList.add('is-on'); }, 1200);
+      // Turn captions off (YouTube may switch them on from the viewer's own settings).
+      var send = function (m) { try { f.contentWindow.postMessage(JSON.stringify(m), '*'); } catch (e) {} };
+      send({ event: 'listening', id: 'filmbg' });
+      [600, 1500, 3000, 6000].forEach(function (t) {
+        setTimeout(function () {
+          send({ event: 'command', func: 'unloadModule', args: ['captions'] });
+          send({ event: 'command', func: 'unloadModule', args: ['cc'] });
+        }, t);
+      });
+    });
     bg.appendChild(f); size();
   }
   // Only load the video when the section is about to come into view.

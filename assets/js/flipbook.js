@@ -44,7 +44,7 @@
       el.classList.add('fb-endcard');
       el.innerHTML = '<p class="eyebrow">There is so much more</p><h3>Preorder to see the rest.</h3>' +
         '<p>370 pages, a fold-out Field Guide, and the E-Book delivered instantly with your preorder.</p>' +
-        '<a class="btn btn-gold" href="' + SHOP + '">Preorder now</a>';
+        '<a class="btn btn-gold" href="' + SHOP + '" target="_blank" rel="noopener">Preorder now</a>';
       return el;
     }
     var img = document.createElement('img');
