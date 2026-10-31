@@ -99,9 +99,9 @@ img { max-width: 100%; }
 .detail.cta:hover { background: rgba(255,255,255,0.03); }
 
 /* Second Temple parallax band */
-.temple { position: relative; overflow: hidden; padding: clamp(120px, 17vh, 200px) var(--gutter); text-align: center; }
+.temple { position: relative; overflow: hidden; padding: clamp(128px, 18.5vh, 214px) var(--gutter); text-align: center; }
 .temple-bg { position: absolute; left: 0; right: 0; top: -25%; height: 150%; z-index: 0; background: url('../img/temple-mount-aerial.jpg') center 62% / cover no-repeat; will-change: transform; }
-.temple-shade { position: absolute; inset: 0; z-index: 0; background: rgba(23,25,30,0.57); }
+.temple-shade { position: absolute; inset: 0; z-index: 0; background: rgba(23,25,30,0.51); }
 .temple-in { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; text-shadow: 0 2px 18px rgba(0,0,0,0.45); }
 .temple-in .eyebrow { margin-bottom: 24px; font-size: 12.8px; }
 .temple-in p.big { margin: 0; font: 300 clamp(23.5px, 2.57vw, 32px)/1.55 var(--display); color: var(--white); text-wrap: balance; }
