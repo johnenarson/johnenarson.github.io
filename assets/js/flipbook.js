@@ -64,8 +64,17 @@
     img.alt = p.alt; img.decoding = 'async'; img.draggable = false; img.src = p.src;
     if (p.cover) el.classList.add('fb-cover');
     el.appendChild(img);
+    if (!p.cover) el.insertAdjacentHTML('beforeend', WM);
     return el;
   }
+
+  // "Preview sample" stamp, shown on left-hand pages in full screen.
+  var WM = '<svg class="fb-wm" viewBox="0 0 200 200" aria-hidden="true">' +
+    '<circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="3"/>' +
+    '<circle cx="100" cy="100" r="84" fill="none" stroke="#fff" stroke-width="1.5"/>' +
+    '<g transform="rotate(-30 100 100)"><line x1="24" y1="84" x2="176" y2="84" stroke="#fff" stroke-width="1.5"/>' +
+    '<line x1="24" y1="116" x2="176" y2="116" stroke="#fff" stroke-width="1.5"/>' +
+    '<text x="100" y="105" text-anchor="middle" fill="#fff" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="14" letter-spacing="2.5">PREVIEW SAMPLE</text></g></svg>';
 
   function spreads() { return Math.ceil(pages.length / 2); }
   function total() { return single ? pages.length : spreads(); }
