@@ -3,15 +3,17 @@
   var root = document.querySelector('[data-flipbook]');
   if (!root) return;
 
-  var COUNT = parseInt(root.getAttribute('data-pages'), 10) || 40;
-  var BASE = root.getAttribute('data-base') || 'assets/flip/p';
+  var BASE = root.getAttribute('data-base') || 'assets/flip/pg';
   var SHOP = root.getAttribute('data-shop') || 'https://arielmedia.shop';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var DUR = reduce ? 0 : 900;
 
   // Page list: the sample pages, then a closing card and the cover.
+  // data-list: the book page numbers included, in order (files are BASE + 3-digit page number).
+  var LIST = (root.getAttribute('data-list') || '').split(',').map(function (n) { return parseInt(n, 10); }).filter(function (n) { return n > 0; });
+  var START = parseInt(root.getAttribute('data-start'), 10) || 0;   // book page to open on
   var pages = [];
-  for (var i = 1; i <= COUNT; i++) pages.push({ src: BASE + (i < 10 ? '0' : '') + i + '.webp', alt: 'Sample page ' + i });
+  LIST.forEach(function (n) { pages.push({ src: BASE + ('00' + n).slice(-3) + '.webp', alt: 'Page ' + n, num: n }); });
   pages.push({ end: true });
   pages.push({ src: 'assets/img/cover.jpg', alt: 'Cover of Jesus and the Temple Mount', cover: true });
 
@@ -36,13 +38,15 @@
     var info = document.createElement('div'); info.className = 'fb-info';
     status.parentNode.insertBefore(info, status); info.appendChild(status);
     var note = document.createElement('span'); note.className = 'fb-note';
-    note.innerHTML = '<span class="fb-dot" aria-hidden="true">·</span>Not in page order';
+    note.innerHTML = '<span class="fb-dot" aria-hidden="true">·</span>Selected spreads';
     info.appendChild(note);
   }
 
   var narrow = window.matchMedia('(max-width: 760px)');
   var single = narrow.matches;
-  var pos = 0;          // spread index (two-page mode) or page index (single mode)
+  var startIdx = 0;
+  pages.forEach(function (p, k) { if (p.num === START) startIdx = k; });
+  var pos = single ? startIdx : Math.floor(startIdx / 2);   // spread index (two-page mode) or page index (single mode)
   var busy = false;
 
   function face(p) {
