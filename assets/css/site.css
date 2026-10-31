@@ -100,13 +100,13 @@ img { max-width: 100%; }
 
 /* Second Temple parallax band */
 .temple { position: relative; overflow: hidden; padding: clamp(120px, 17vh, 200px) var(--gutter); text-align: center; }
-.temple-bg { position: absolute; left: 0; right: 0; top: -25%; height: 150%; z-index: 0; background: url('../img/second-temple.jpg') center 40% / cover no-repeat; will-change: transform; }
+.temple-bg { position: absolute; left: 0; right: 0; top: -25%; height: 150%; z-index: 0; background: url('../img/temple-mount-aerial.jpg') center 62% / cover no-repeat; will-change: transform; }
 .temple-shade { position: absolute; inset: 0; z-index: 0; background: rgba(23,25,30,0.57); }
 .temple-in { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; text-shadow: 0 2px 18px rgba(0,0,0,0.45); }
 .temple-in .eyebrow { margin-bottom: 24px; font-size: 12.8px; }
 .temple-in p.big { margin: 0; font: 300 clamp(23.5px, 2.57vw, 32px)/1.55 var(--display); color: var(--white); text-wrap: balance; }
 .temple-in p.big em { font-style: italic; color: var(--gold); }
-@media (max-width: 860px) { .temple-bg { background-image: url('../img/second-temple-sm.jpg'); } }
+@media (max-width: 860px) { .temple-bg { background-image: url('../img/temple-mount-aerial-sm.jpg'); } }
 
 /* Sections */
 .sec { border-top: 1px solid var(--rule); padding: var(--sec-pad) var(--gutter); }
@@ -216,6 +216,11 @@ img { max-width: 100%; }
 .page-hero { position: relative; padding: clamp(80px, 12vh, 140px) var(--gutter) clamp(64px, 9vh, 104px);
   background: radial-gradient(ellipse 50% 70% at 30% 40%, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0) 100%); }
 .page-hero .wrap { max-width: 1120px; }
+.page-hero.photo { overflow: hidden; background: none; }
+.page-hero.photo .wrap { position: relative; z-index: 1; text-shadow: 0 2px 18px rgba(0,0,0,0.5); }
+.ph-bg { position: absolute; inset: 0; z-index: 0; background: url('../img/olive-view.jpg') center 45% / cover no-repeat; }
+.ph-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(23,25,30,0.86) 0%, rgba(23,25,30,0.62) 55%, rgba(23,25,30,0.35) 100%), linear-gradient(180deg, rgba(23,25,30,0) 60%, rgba(23,25,30,0.7) 100%); }
+@media (max-width: 860px) { .ph-bg { background-image: url('../img/olive-view-sm.jpg'); } .ph-bg::after { background: rgba(23,25,30,0.72); } }
 .page-hero h1 { margin: 0 0 28px; max-width: 15em; font-family: var(--display); font-weight: 300; font-size: clamp(40px, 6vw, 76px); line-height: 1.08; letter-spacing: -0.02em; color: var(--white); text-wrap: balance; }
 .page-hero h1 em { font-style: italic; color: var(--gold); }
 .page-hero .lead { font-size: clamp(19px, 1.7vw, 23px); }
