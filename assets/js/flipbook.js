@@ -36,7 +36,7 @@
     var info = document.createElement('div'); info.className = 'fb-info';
     status.parentNode.insertBefore(info, status); info.appendChild(status);
     var note = document.createElement('span'); note.className = 'fb-note';
-    note.textContent = 'Selected spreads · Not in page order';
+    note.innerHTML = '<span class="fb-dot" aria-hidden="true">·</span>Not in page order';
     info.appendChild(note);
   }
 
