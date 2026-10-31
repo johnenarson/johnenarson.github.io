@@ -31,6 +31,11 @@
   var stackR = document.createElement('div'); stackR.className = 'fb-stack fb-stack-r'; stackR.setAttribute('aria-hidden', 'true');
   book.insertBefore(stackR, stage); book.insertBefore(stackL, stackR); book.insertBefore(kase, stackL);
 
+  // Make clear these are hand-picked pages, not the book in order.
+  var note = document.createElement('p'); note.className = 'fb-note';
+  note.innerHTML = '<span>Selected sample spreads</span><span class="fb-dot" aria-hidden="true">·</span><span>Not in page order</span>';
+  root.insertBefore(note, book);
+
   var narrow = window.matchMedia('(max-width: 760px)');
   var single = narrow.matches;
   var pos = 0;          // spread index (two-page mode) or page index (single mode)
@@ -80,7 +85,7 @@
     book.style.setProperty('--sr', (2 + 7 * (1 - prog)).toFixed(1) + 'px');
     prevBtn.disabled = pos === 0;
     nextBtn.disabled = pos >= total() - 1;
-    if (status) status.textContent = single ? ('Page ' + (pos + 1) + ' of ' + pages.length) : ('Spread ' + (pos + 1) + ' of ' + spreads());
+    if (status) status.textContent = single ? ('Sample page ' + (pos + 1) + ' of ' + pages.length) : ('Sample ' + (pos + 1) + ' of ' + spreads());
     preload(pos);
   }
 

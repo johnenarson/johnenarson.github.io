@@ -424,6 +424,8 @@ img { max-width: 100%; }
 .fb-cover { background: var(--navy) !important; }
 .fb-cover img { object-fit: cover; }
 
+.fb-note { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px; margin: 0 0 26px; font: 600 12.5px/1.4 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-align: center; }
+.fb-note .fb-dot { color: rgba(255,255,255,0.35); }
 .fb-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 28px; }
 .fb-controls button { width: 50px; height: 50px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.03); color: var(--white); cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center; transition: background .18s ease, border-color .18s ease, opacity .18s ease; }
