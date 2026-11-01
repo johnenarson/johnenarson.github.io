@@ -367,7 +367,7 @@ img { max-width: 100%; }
 .fb-board-l { border-radius: 3px 0 0 3px; }
 .fb-board-r { border-radius: 0 3px 3px 0; }
 .fb-art { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.9); }
-.fb-board-l .fb-art { background-image: url('../img/board-front.webp'); }
+.fb-board-l .fb-art { background-image: url('../img/board-front.webp?v=2'); }
 .fb-board-r .fb-art { background-image: url('../img/board-back.webp'); }
 /* Dust-jacket flaps wrapped around the outer edges, about 118mm deep */
 .fb-flap { position: absolute; top: 0; bottom: 0; width: calc(var(--mm) * 118); background-size: 100% 100%; }
@@ -428,6 +428,11 @@ img { max-width: 100%; }
 .fb-endcard h3 { margin: 0; font: 300 clamp(22px, 3vw, 40px)/1.15 var(--display); color: var(--white); }
 .fb-endcard p { margin: 0; font-size: clamp(13px, 1.3vw, 17px); line-height: 1.6; color: var(--ink); }
 .fb-endcard .btn { min-height: 44px; }
+.fb-endcard h3 em { font-style: italic; color: var(--gold); }
+.fb-offer { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.9em; font-size: clamp(12px, 1.15vw, 16px); line-height: 1.5; color: var(--ink); }
+.fb-offer li { position: relative; padding-left: 1.4em; }
+.fb-offer li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--gold); }
+.fb-offer b { color: var(--white); font-weight: 600; }
 .fb-cover { background: var(--navy) !important; }
 .fb-cover img { object-fit: cover; }
 

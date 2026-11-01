@@ -14,8 +14,10 @@
   var START = parseInt(root.getAttribute('data-start'), 10) || 0;   // book page to open on
   var pages = [];
   LIST.forEach(function (n) { pages.push({ src: BASE + ('00' + n).slice(-3) + '.webp', alt: 'Page ' + n, num: n }); });
+  // Closing spread: the cover on the left, the preorder offer on the right.
+  if (pages.length % 2) pages.push({ blank: true });
+  pages.push({ src: 'assets/img/cover.jpg?v=2', alt: 'Cover of Jesus and the Temple Mount', cover: true });
   pages.push({ end: true });
-  pages.push({ src: 'assets/img/cover.jpg', alt: 'Cover of Jesus and the Temple Mount', cover: true });
 
   var book = root.querySelector('.fb-book');
   var stage = root.querySelector('.fb-stage');
@@ -52,11 +54,16 @@
   function face(p) {
     var el = document.createElement('div');
     el.className = 'fb-face';
-    if (!p) return el;
+    if (!p || p.blank) return el;
     if (p.end) {
       el.classList.add('fb-endcard');
-      el.innerHTML = '<p class="eyebrow">There is so much more</p><h3>Preorder to see the rest.</h3>' +
-        '<p>370 pages, a fold-out Field Guide, and the E-Book delivered instantly with your preorder.</p>' +
+      el.innerHTML = '<p class="eyebrow">Preorder offer</p>' +
+        '<h3>Get both editions. <em>Start reading today.</em></h3>' +
+        '<ul class="fb-offer">' +
+          '<li><b>The E-Book, instantly.</b> Delivered the moment you preorder.</li>' +
+          '<li><b>The printed edition.</b> The large-format coffee table hardcover, 370 pages with dust jacket, shipped on release.</li>' +
+          '<li><b>The Field Guide.</b> A fold-out map to follow along on location.</li>' +
+        '</ul>' +
         '<a class="btn btn-gold" href="' + SHOP + '" target="_blank" rel="noopener">Preorder now</a>';
       return el;
     }
