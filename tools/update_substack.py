@@ -1,30 +1,87 @@
-"""Fetch the Substack RSS feed and write the three latest posts to data/substack.json."""
-import json, re, urllib.request, xml.etree.ElementTree as ET
+"""Fetch the Substack feed and write the three latest posts to data/substack.json.
+
+Substack often blocks GitHub's servers (HTTP 403), so if the direct RSS fetch
+fails we fall back to the rss2json.com relay. If both fail, the existing data is
+kept and the job exits successfully instead of sending a failure email.
+"""
+import json, os, re, sys, urllib.parse, urllib.request, xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 from datetime import date
 
 FEED = 'https://johnenarson.substack.com/feed'
-req = urllib.request.Request(FEED, headers={'User-Agent': 'Mozilla/5.0 (johnenarson.com feed updater)'})
-root = ET.fromstring(urllib.request.urlopen(req, timeout=30).read())
-posts = []
-for item in root.iter('item'):
-    enc = item.find('enclosure')
-    img = enc.get('url') if enc is not None else ''
-    if not img:
-        m = re.search(r'<img[^>]+src="([^"]+)"', item.findtext('{http://purl.org/rss/1.0/modules/content/}encoded') or '')
-        img = m.group(1) if m else ''
-    posts.append({
-        'title': (item.findtext('title') or '').strip(),
-        'subtitle': re.sub('<[^>]+>', '', item.findtext('description') or '').strip(),
-        'url': (item.findtext('link') or '').strip(),
-        'date': parsedate_to_datetime(item.findtext('pubDate')).date().isoformat(),
-        'image': img,
-    })
+OUT = 'data/substack.json'
+UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
+
+
+def get(url):
+    req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': '*/*'})
+    return urllib.request.urlopen(req, timeout=30).read()
+
+
+def strip_tags(s):
+    return re.sub('<[^>]+>', '', s or '').strip()
+
+
+def first_img(html):
+    m = re.search(r'<img[^>]+src="([^"]+)"', html or '')
+    return m.group(1) if m else ''
+
+
+def from_rss():
+    root = ET.fromstring(get(FEED))
+    posts = []
+    for item in root.iter('item'):
+        enc = item.find('enclosure')
+        img = enc.get('url') if enc is not None else ''
+        img = img or first_img(item.findtext('{http://purl.org/rss/1.0/modules/content/}encoded'))
+        posts.append({
+            'title': (item.findtext('title') or '').strip(),
+            'subtitle': strip_tags(item.findtext('description')),
+            'url': (item.findtext('link') or '').strip(),
+            'date': parsedate_to_datetime(item.findtext('pubDate')).date().isoformat(),
+            'image': img,
+        })
+    return posts
+
+
+def from_rss2json():
+    url = 'https://api.rss2json.com/v1/api.json?rss_url=' + urllib.parse.quote(FEED, safe='')
+    data = json.loads(get(url))
+    if data.get('status') != 'ok':
+        raise RuntimeError(data.get('message', 'rss2json error'))
+    posts = []
+    for it in data['items']:
+        img = (it.get('enclosure') or {}).get('link') or it.get('thumbnail') or first_img(it.get('content'))
+        posts.append({
+            'title': (it.get('title') or '').strip(),
+            'subtitle': strip_tags(it.get('description')),
+            'url': (it.get('link') or '').strip(),
+            'date': (it.get('pubDate') or '')[:10],
+            'image': img,
+        })
+    return posts
+
+
+posts = None
+for name, fn in (('Substack RSS', from_rss), ('rss2json relay', from_rss2json)):
+    try:
+        posts = fn()
+        if posts:
+            print(f'Fetched {len(posts)} posts via {name}')
+            break
+    except Exception as e:
+        print(f'::warning::{name} failed: {e}')
+
+if not posts:
+    print('::warning::Could not fetch the Substack feed; keeping existing posts.')
+    sys.exit(0)
+
 posts.sort(key=lambda p: p['date'], reverse=True)
 out = {'updated': date.today().isoformat(), 'posts': posts[:3]}
-old = json.load(open('data/substack.json')) if __import__('os').path.exists('data/substack.json') else {}
+old = json.load(open(OUT, encoding='utf-8')) if os.path.exists(OUT) else {}
 if old.get('posts') != out['posts']:
-    json.dump(out, open('data/substack.json', 'w'), ensure_ascii=False, indent=2)
+    with open(OUT, 'w', encoding='utf-8') as f:
+        json.dump(out, f, ensure_ascii=False, indent=2)
     print('updated')
 else:
     print('no change')
