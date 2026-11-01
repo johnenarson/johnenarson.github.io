@@ -568,3 +568,27 @@ a.inline-link:hover { color: var(--gold-hi); text-decoration-color: var(--gold-h
 .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .cards-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .card .num { text-transform: none; }
+
+/* Writing: lead Substack post as a cinematic wide card (blurred image fills the left behind the title) */
+.post.is-lead { grid-column: 1 / -1; position: relative; display: flex; flex-direction: row; align-items: flex-end; min-height: clamp(360px, 34vw, 500px); padding: clamp(32px, 4.5vw, 64px); border-radius: 10px; overflow: hidden; background: #1a1c20; box-shadow: 0 30px 60px rgba(0,0,0,0.4); gap: 0; }
+.post.is-lead .post-blur { position: absolute; inset: -60px; background-size: cover; background-position: center 30%; filter: blur(48px) saturate(0.85) brightness(0.55); transform: scale(1.15); }
+.post.is-lead::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(19,21,25,0.55) 0%, rgba(19,21,25,0.15) 45%, rgba(19,21,25,0) 60%); pointer-events: none; }
+.post.is-lead .post-img { position: absolute; top: 0; right: 0; bottom: 0; width: 58%; aspect-ratio: auto; margin: 0; border-radius: 0; box-shadow: none; background: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 18%, #000 40%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 18%, #000 40%); }
+.post.is-lead .post-img img { object-position: center 28%; }
+.post.is-lead .post-txt { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 14px; width: min(52%, 620px); }
+.post.is-lead .post-date { color: var(--gold); }
+.post.is-lead b { font: 300 clamp(36px, 4.6vw, 64px)/1.06 var(--display); letter-spacing: -0.02em; color: var(--white); text-wrap: balance; text-shadow: 0 2px 20px rgba(0,0,0,0.35); }
+.post.is-lead:hover b { color: var(--white); }
+.post.is-lead .post-sub { font-size: clamp(17px, 1.5vw, 20px); color: rgba(255,255,255,0.85); -webkit-line-clamp: 3; }
+.post.is-lead .post-more { display: inline-flex; align-items: center; gap: 18px; margin-top: 14px; font: 600 13px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); }
+.post-go { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: var(--white); color: var(--navy); transition: background .18s ease, transform .18s ease; }
+.post-go svg { width: 22px; height: 22px; }
+.post.is-lead:hover .post-go { background: var(--gold); transform: translateX(3px); }
+.post.is-lead:hover .post-img img { transform: scale(1.03); }
+@media (max-width: 860px) {
+  .post.is-lead { flex-direction: column; align-items: stretch; min-height: 0; padding: 0 0 28px; }
+  .post.is-lead .post-img { position: relative; width: 100%; aspect-ratio: 4 / 3; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
+  .post.is-lead::before { display: none; }
+  .post.is-lead .post-txt { width: auto; margin: -40px 24px 0; }
+}
