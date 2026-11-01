@@ -228,6 +228,7 @@ img { max-width: 100%; }
 .ph-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(23,25,30,0.86) 0%, rgba(23,25,30,0.62) 55%, rgba(23,25,30,0.35) 100%), linear-gradient(180deg, rgba(23,25,30,0) 60%, rgba(23,25,30,0.7) 100%); }
 @media (max-width: 860px) { .ph-bg { background: url('../img/olive-view-sm.jpg') 70% 50% / cover no-repeat; } .ph-bg::after { background: rgba(23,25,30,0.72); } }
 .page-hero h1 { margin: 0 0 28px; max-width: 15em; font-family: var(--display); font-weight: 300; font-size: clamp(40px, 6vw, 76px); line-height: 1.08; letter-spacing: -0.02em; color: var(--white); text-wrap: balance; }
+.page-title { margin: 0 0 40px; font-family: var(--display); font-weight: 300; font-size: clamp(40px, 6vw, 76px); line-height: 1.08; letter-spacing: -0.02em; color: var(--white); }
 .page-hero h1 em { font-style: italic; color: var(--gold); }
 .page-hero .lead { font-size: clamp(19px, 1.7vw, 23px); }
 .page-hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
