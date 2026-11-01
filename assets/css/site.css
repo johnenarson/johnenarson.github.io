@@ -599,3 +599,8 @@ a.inline-link:hover { color: var(--gold-hi); text-decoration-color: var(--gold-h
 .photo-credit { position: absolute; z-index: 2; bottom: 14px; margin: 0; font: 500 10px/1.45 var(--sans); letter-spacing: 0.06em; color: rgba(255,255,255,0.5); text-shadow: 0 1px 6px rgba(0,0,0,0.4); pointer-events: none; }
 .photo-credit.pc-left { left: var(--gutter); text-align: left; }
 .photo-credit.pc-right { right: var(--gutter); text-align: right; }
+/* Featured on: light stripe matching the home endorsements band */
+.outlets { background: linear-gradient(90deg, #e9edf0 0%, #f6f7f8 100%); border-top: 0; border-bottom: 0; padding: 48px var(--gutter); }
+.outlets .eyebrow { color: #9a7428; }
+.outlet-list a { color: rgba(25,25,25,0.62); }
+.outlet-list a:hover { color: var(--navy); }
