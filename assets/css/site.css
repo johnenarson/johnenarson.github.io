@@ -594,5 +594,8 @@ a.inline-link:hover { color: var(--gold-hi); text-decoration-color: var(--gold-h
   .post.is-lead::before { display: none; }
   .post.is-lead .post-txt { width: auto; margin: -40px var(--gutter) 0; }
 }
-.latest-all { margin: clamp(32px, 4vw, 48px) 0 0; text-align: right; }
 .post.is-lead { margin-top: 0; }
+.post.is-lead { border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
+.photo-credit { position: absolute; z-index: 2; bottom: 14px; margin: 0; font: 500 10px/1.45 var(--sans); letter-spacing: 0.06em; color: rgba(255,255,255,0.5); text-shadow: 0 1px 6px rgba(0,0,0,0.4); pointer-events: none; }
+.photo-credit.pc-left { left: var(--gutter); text-align: left; }
+.photo-credit.pc-right { right: var(--gutter); text-align: right; }
