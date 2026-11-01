@@ -586,9 +586,11 @@ a.inline-link:hover { color: var(--gold-hi); text-decoration-color: var(--gold-h
 .post-go svg { width: 22px; height: 22px; }
 .post.is-lead:hover .post-go { background: var(--gold); transform: translateX(3px); }
 .post.is-lead:hover .post-img img { transform: scale(1.03); }
+.post.is-lead { width: 100vw; margin: 0 calc(50% - 50vw); border-radius: 0; box-shadow: none; min-height: clamp(420px, 38vw, 600px); padding: clamp(48px, 5vw, 80px) max(var(--gutter), calc((100vw - 1120px) / 2)); }
+.post.is-lead .post-img { width: 60%; }
 @media (max-width: 860px) {
-  .post.is-lead { flex-direction: column; align-items: stretch; min-height: 0; padding: 0 0 28px; }
+  .post.is-lead { flex-direction: column; align-items: stretch; min-height: 0; padding: 0 0 36px; }
   .post.is-lead .post-img { position: relative; width: 100%; aspect-ratio: 4 / 3; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
   .post.is-lead::before { display: none; }
-  .post.is-lead .post-txt { width: auto; margin: -40px 24px 0; }
+  .post.is-lead .post-txt { width: auto; margin: -40px var(--gutter) 0; }
 }
