@@ -1,8 +1,8 @@
 """Fetch the Substack feed and write the three latest posts to data/substack.json.
 
-Substack often blocks GitHub's servers (HTTP 403), so if the direct RSS fetch
-fails we fall back to the rss2json.com relay. If both fail, the existing data is
-kept and the job exits successfully instead of sending a failure email.
+Substack often blocks GitHub's servers (HTTP 403). If the fetch fails, the
+existing data is kept and the job exits successfully instead of sending a
+failure email.
 """
 import json, os, re, sys, urllib.parse, urllib.request, xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
@@ -44,26 +44,8 @@ def from_rss():
     return posts
 
 
-def from_rss2json():
-    url = 'https://api.rss2json.com/v1/api.json?rss_url=' + urllib.parse.quote(FEED, safe='')
-    data = json.loads(get(url))
-    if data.get('status') != 'ok':
-        raise RuntimeError(data.get('message', 'rss2json error'))
-    posts = []
-    for it in data['items']:
-        img = (it.get('enclosure') or {}).get('link') or it.get('thumbnail') or first_img(it.get('content'))
-        posts.append({
-            'title': (it.get('title') or '').strip(),
-            'subtitle': strip_tags(it.get('description')),
-            'url': (it.get('link') or '').strip(),
-            'date': (it.get('pubDate') or '')[:10],
-            'image': img,
-        })
-    return posts
-
-
 posts = None
-for name, fn in (('Substack RSS', from_rss), ('rss2json relay', from_rss2json)):
+for name, fn in (('Substack RSS', from_rss),):
     try:
         posts = fn()
         if posts:
