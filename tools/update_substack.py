@@ -10,7 +10,7 @@ from datetime import date
 
 FEED = 'https://johnenarson.substack.com/feed'
 OUT = 'data/substack.json'
-UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
+UA = 'Mozilla/5.0 (johnenarson.com feed updater)'
 
 
 def get(url):
